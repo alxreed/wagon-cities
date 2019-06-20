@@ -1,10 +1,6 @@
-// TODO: add and export your own actions
-import cities from '../cities';
-
-// eslint-disable-next-line import/prefer-default-export
-export function setCities() {
+export default function selectCity(city) {
   return {
-    type: 'SET_CITIES',
-    playload: cities
+    type: 'CITY_SELECTED',
+    payload: city
   };
 }

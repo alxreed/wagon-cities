@@ -1,29 +1,26 @@
-import React, { Component } from "react";
-import { bindActionCreators } from 'redux';
+
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { setCities } from '../actions';
-import City from "./city";
+import { bindActionCreators } from 'redux';
+
+import City from '../containers/city';
 
 class CityList extends Component {
-  componentWillMount() {
-    this.props.setCities();
+  renderList() {
+    return this.props.cities.map((city) => {
+      return (
+        <City key={city.name} city={city} />
+      );
+    });
   }
 
   render() {
     return (
       <ul className="list-group cities">
-        {this.props.cities.map(city => <City city={city} key={city.name} />)}
+        {this.renderList()}
       </ul>
-    )
+    );
   }
-}
-
-function mapDispatchToProps(dispatch) {
-  return bindActionCreators(
-    // eslint-disable-next-line object-shorthand
-    { setCities: setCities },
-    dispatch
-  );
 }
 
 function mapStateToProps(state) {
@@ -32,4 +29,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(CityList);
+export default connect(mapStateToProps)(CityList);
